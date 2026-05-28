@@ -24,20 +24,22 @@ export default function StatsPage() {
 
   const groupStats = ALBUM_GROUPS.map((group) => {
     let gAll = 0, gHave = 0
-    group.teams.forEach((team) => {
+    const teamStats = group.teams.map((team) => {
       const range = group.customRange?.[team.prefix]
       const start = range?.start ?? 1
       const end = range?.end ?? STICKERS_PER_TEAM
       const zeroPad = range?.zeroPad ?? false
+      let tAll = 0, tHave = 0
       for (let i = start; i <= end; i++) {
         const key = getKey(team.prefix, i, zeroPad)
         const count = stickers[key] || 0
-        gAll++; totalAll++
-        if (count >= 1) { gHave++; totalHave++ }
+        tAll++; gAll++; totalAll++
+        if (count >= 1) { tHave++; gHave++; totalHave++ }
         totalRepeated += Math.max(0, count - 1)
       }
+      return { name: team.name, prefix: team.prefix, have: tHave, total: tAll, pct: Math.round((tHave / tAll) * 100) }
     })
-    return { name: group.name, have: gHave, total: gAll, pct: Math.round((gHave / gAll) * 100) }
+    return { name: group.name, have: gHave, total: gAll, pct: Math.round((gHave / gAll) * 100), teamStats }
   })
 
   const totalMissing = totalAll - totalHave
@@ -78,14 +80,31 @@ export default function StatsPage() {
       <h2 className={styles.sectionTitle}>Por grupo</h2>
       <div className={styles.groupList}>
         {groupStats.map((g) => (
-          <div key={g.name} className={styles.groupRow}>
-            <div className={styles.groupInfo}>
-              <span className={styles.groupName}>{g.name}</span>
-              <span className={styles.groupCount}>{g.have}/{g.total}</span>
+          <div key={g.name} className={styles.groupBlock}>
+            <div className={styles.groupRow}>
+              <div className={styles.groupInfo}>
+                <span className={styles.groupName}>{g.name}</span>
+                <span className={styles.groupCount}>{g.have}/{g.total}</span>
+              </div>
+              <div className={styles.bar}>
+                <div className={`${styles.barFill} ${g.pct === 100 ? styles.done : ''}`}
+                  style={{ width: `${g.pct}%` }} />
+              </div>
             </div>
-            <div className={styles.bar}>
-              <div className={`${styles.barFill} ${g.pct === 100 ? styles.done : ''}`}
-                style={{ width: `${g.pct}%` }} />
+            <div className={styles.teamList}>
+              {g.teamStats.map((t) => (
+                <div key={t.prefix} className={styles.teamRow}>
+                  <div className={styles.teamInfo}>
+                    <span className={styles.teamPrefix}>{t.prefix}</span>
+                    <span className={styles.teamName}>{t.name}</span>
+                    <span className={styles.teamCount}>{t.have}/{t.total}</span>
+                  </div>
+                  <div className={styles.barSmall}>
+                    <div className={`${styles.barFill} ${t.pct === 100 ? styles.done : ''}`}
+                      style={{ width: `${t.pct}%` }} />
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         ))}

@@ -54,16 +54,31 @@
   margin-bottom: 12px;
 }
 
-.groupList { display: flex; flex-direction: column; gap: 12px; }
-.groupRow {}
+.groupList { display: flex; flex-direction: column; gap: 16px; }
+
+.groupBlock {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.groupRow {
+  padding: 10px 12px 8px;
+  border-bottom: 1px solid var(--border);
+}
+
 .groupInfo {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
-.groupName { font-size: 13px; color: var(--text); }
+.groupName { font-size: 13px; font-weight: 600; color: var(--text); }
 .groupCount { font-size: 12px; color: var(--text-muted); }
+
 .bar { height: 6px; background: var(--border); border-radius: 99px; overflow: hidden; }
+.barSmall { height: 4px; background: var(--border); border-radius: 99px; overflow: hidden; }
+
 .barFill {
   height: 100%;
   background: var(--green);
@@ -72,3 +87,29 @@
   opacity: 0.75;
 }
 .barFill.done { opacity: 1; }
+
+.teamList { display: flex; flex-direction: column; }
+
+.teamRow {
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.teamRow:last-child { border-bottom: none; }
+
+.teamInfo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.teamPrefix {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: var(--border);
+  padding: 1px 5px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.teamName { font-size: 12px; color: var(--text); flex: 1; }
+.teamCount { font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
