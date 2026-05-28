@@ -11,6 +11,27 @@
     <meta name="apple-mobile-web-app-title" content="Figurinhas" />
     <link rel="apple-touch-icon" href="/icon-192.png" />
     <title>Copa Figurinhas 2026</title>
+    <script>
+      // Restaura a rota após redirecionamento do 404.html
+      (function() {
+        var redirect = sessionStorage.redirect
+        delete sessionStorage.redirect
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, null, redirect)
+        }
+        // Lê o parâmetro ?p= gerado pelo 404.html
+        var p = window.location.search
+        if (p && p.indexOf('?p=/') === 0) {
+          var path = p.slice(3).replace(/~and~/g, '&')
+          var rest = path.split('&q=')
+          history.replaceState(null, null,
+            window.location.pathname.split('?')[0] + rest[0] +
+            (rest[1] ? '?' + rest[1] : '') +
+            window.location.hash
+          )
+        }
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>
