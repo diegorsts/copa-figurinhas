@@ -1,11 +1,13 @@
 const CACHE_NAME = 'copa-figurinhas-v1'
 
+const BASE = '/copa-figurinhas'
+
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/icon-192.png',
-  '/icon-512.png',
-  '/manifest.json',
+  BASE + '/',
+  BASE + '/index.html',
+  BASE + '/icon-192.png',
+  BASE + '/icon-512.png',
+  BASE + '/manifest.json',
 ]
 
 self.addEventListener('install', (event) => {
