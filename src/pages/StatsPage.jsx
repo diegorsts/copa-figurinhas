@@ -14,6 +14,11 @@ function getKey(prefix, i, zeroPad) {
 export default function StatsPage() {
   const { user } = useAuth()
   const [stickers, setStickers] = useState({})
+  const [expandedGroups, setExpandedGroups] = useState({})
+
+  function toggleGroup(name) {
+    setExpandedGroups((prev) => ({ ...prev, [name]: !prev[name] }))
+  }
 
   useEffect(() => {
     if (!user) return
@@ -79,35 +84,43 @@ export default function StatsPage() {
 
       <h2 className={styles.sectionTitle}>Por grupo</h2>
       <div className={styles.groupList}>
-        {groupStats.map((g) => (
-          <div key={g.name} className={styles.groupBlock}>
-            <div className={styles.groupRow}>
-              <div className={styles.groupInfo}>
-                <span className={styles.groupName}>{g.name}</span>
-                <span className={styles.groupCount}>{g.have}/{g.total}</span>
-              </div>
-              <div className={styles.bar}>
-                <div className={`${styles.barFill} ${g.pct === 100 ? styles.done : ''}`}
-                  style={{ width: `${g.pct}%` }} />
-              </div>
-            </div>
-            <div className={styles.teamList}>
-              {g.teamStats.map((t) => (
-                <div key={t.prefix} className={styles.teamRow}>
-                  <div className={styles.teamInfo}>
-                    <span className={styles.teamPrefix}>{t.prefix}</span>
-                    <span className={styles.teamName}>{t.name}</span>
-                    <span className={styles.teamCount}>{t.have}/{t.total}</span>
-                  </div>
-                  <div className={styles.barSmall}>
-                    <div className={`${styles.barFill} ${t.pct === 100 ? styles.done : ''}`}
-                      style={{ width: `${t.pct}%` }} />
+        {groupStats.map((g) => {
+          const expanded = !!expandedGroups[g.name]
+          return (
+            <div key={g.name} className={styles.groupBlock}>
+              <div className={styles.groupRow} onClick={() => toggleGroup(g.name)}>
+                <div className={styles.groupInfo}>
+                  <span className={styles.groupName}>{g.name}</span>
+                  <div className={styles.groupRight}>
+                    <span className={styles.groupCount}>{g.have}/{g.total}</span>
+                    <span className={styles.chevron}>{expanded ? '▲' : '▼'}</span>
                   </div>
                 </div>
-              ))}
+                <div className={styles.bar}>
+                  <div className={`${styles.barFill} ${g.pct === 100 ? styles.done : ''}`}
+                    style={{ width: `${g.pct}%` }} />
+                </div>
+              </div>
+              {expanded && (
+                <div className={styles.teamList}>
+                  {g.teamStats.map((t) => (
+                    <div key={t.prefix} className={styles.teamRow}>
+                      <div className={styles.teamInfo}>
+                        <span className={styles.teamPrefix}>{t.prefix}</span>
+                        <span className={styles.teamName}>{t.name}</span>
+                        <span className={styles.teamCount}>{t.have}/{t.total}</span>
+                      </div>
+                      <div className={styles.barSmall}>
+                        <div className={`${styles.barFill} ${t.pct === 100 ? styles.done : ''}`}
+                          style={{ width: `${t.pct}%` }} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
-          </div>
-        ))}
+          )
+        })}
       </div>
     </div>
   )
