@@ -1,0 +1,421 @@
+.page { padding: 0 0 16px; }
+
+.stickyTop {
+  position: sticky;
+  top: 0;
+  z-index: 9;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.progressBar {
+  height: 4px;
+  background: var(--border);
+}
+.progressFill {
+  height: 100%;
+  background: var(--green);
+  transition: width 0.4s;
+}
+.progressLabel {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px 4px;
+  position: relative;
+}
+.repeatedBadge {
+  color: #e6a000;
+  font-weight: 600;
+}
+
+.searchRow { padding: 10px 12px 6px; }
+.search {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 14px;
+  background: var(--surface);
+  color: var(--text);
+  outline: none;
+}
+.search:focus { border-color: var(--green); }
+
+.filterRow {
+  display: flex;
+  gap: 5px;
+  padding: 0 12px 10px;
+}
+
+.filterBtn {
+  flex: 1;
+  padding: 6px 4px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+  white-space: nowrap;
+}
+.filterBtn.active {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
+
+.groups { padding: 0 12px; }
+
+.group { margin-bottom: 24px; }
+.groupTitle {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text);
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--green);
+}
+
+.teamBlock { margin-bottom: 14px; }
+.teamName {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.teamPrefix {
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--green);
+  color: #fff;
+  padding: 2px 7px;
+  border-radius: 4px;
+  letter-spacing: 0.03em;
+}
+.teamFullName {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
+}
+
+/* ── Sticker base ── */
+.sticker {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.1s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.sticker:active { transform: scale(0.85); }
+
+/* área clicável principal (incrementa) */
+.stickerMain {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+}
+
+.stickerLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  line-height: 1;
+}
+
+.counter {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* botão × — faixa fina na base do quadrado */
+.removeBtn {
+  width: 100%;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.15s;
+  flex-shrink: 0;
+}
+.removeBtn:active { opacity: 0.6; }
+
+/* ── Estado: tenho (verde) ── */
+.have {
+  background: #e8f5e2;
+  border-color: #8bc34a;
+}
+.have .stickerLabel { color: #33691e; }
+.have .removeBtn {
+  background: #c5e1a5;
+  color: #33691e;
+}
+
+/* ── Estado: 1 repetida (azul) ── */
+.repeated1 {
+  background: #e3f2fd;
+  border-color: #64b5f6;
+}
+.repeated1 .stickerLabel { color: #0d47a1; }
+.repeated1 .counter { color: #1565c0; }
+.repeated1 .removeBtn {
+  background: #bbdefb;
+  color: #0d47a1;
+}
+
+/* ── Estado: 2 repetidas (amarelo) ── */
+.repeated2 {
+  background: #fff8e1;
+  border-color: #ffc107;
+}
+.repeated2 .stickerLabel { color: #6d4c00; }
+.repeated2 .counter { color: #e65100; }
+.repeated2 .removeBtn {
+  background: #ffe082;
+  color: #6d4c00;
+}
+
+/* ── Estado: 3+ repetidas (vermelho) ── */
+.repeated3 {
+  background: #fce8e8;
+  border-color: #e53935;
+}
+.repeated3 .stickerLabel { color: #7f0000; }
+.repeated3 .counter { color: #c62828; }
+.repeated3 .removeBtn {
+  background: #ffcdd2;
+  color: #7f0000;
+}
+
+
+.statCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius-md, 8px);
+  padding: 8px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.statNum {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ── Brilhante ── */
+.shiny {
+  border-style: dashed;
+  border-color: #a855f7;
+}
+.shiny.have {
+  background: linear-gradient(135deg, #e8f5e2, #f3e8ff);
+  border-color: #a855f7;
+  border-style: solid;
+}
+.stickerIcon {
+  font-size: 8px;
+  line-height: 1;
+}
+.shinyBtn {
+  border-color: #a855f7 !important;
+  color: #7c3aed !important;
+}
+.shinyBtn.active {
+  background: #a855f7 !important;
+  border-color: #a855f7 !important;
+  color: #fff !important;
+}
+.statTotal {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+/* ── Foto da equipe (nº 13) ── */
+.teamPhoto {
+  border-style: dashed;
+  border-color: #0ea5e9;
+}
+.teamPhoto.have {
+  background: linear-gradient(135deg, #e8f5e2, #e0f2fe);
+  border-color: #0ea5e9;
+  border-style: solid;
+}
+.photoBtn {
+  border-color: #0ea5e9 !important;
+  color: #0369a1 !important;
+}
+.photoBtn.active {
+  background: #0ea5e9 !important;
+  border-color: #0ea5e9 !important;
+  color: #fff !important;
+}
+
+
+/* ── Contadores por time ── */
+.teamCounters {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+  align-items: center;
+}
+
+.tcHave, .tcMissing, .tcRepeated {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 10px;
+  line-height: 1.4;
+}
+
+.tcHave {
+  background: #e8f5e2;
+  color: #33691e;
+}
+
+.tcMissing {
+  background: #fce8e8;
+  color: #8b0000;
+}
+
+.tcRepeated {
+  background: #fff8e1;
+  color: #6d4c00;
+}
+
+/* ── Stat card clicável ── */
+.statCardClickable {
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.statCardClickable:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+/* ── Painel de detalhe ── */
+.detailPanel {
+  padding: 6px 12px 4px;
+}
+.detailGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+.detailGrid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+.detailCard {
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 8px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.detailDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.detailNum {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+}
+.detailLabel {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ── Stats rows ── */
+/* ── Botão recolher stats ── */
+.collapseBtn {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 3px 10px;
+  border-radius: 6px;
+  line-height: 1;
+  transition: background 0.15s, color 0.15s;
+}
+.collapseBtn:hover {
+  background: var(--border);
+  color: var(--text);
+}
+
+.statsRow1, .statsRow2 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  padding: 6px 12px 0;
+}
+.statsRow2 { padding-bottom: 4px; }
+
+/* ── FWC e CC filter buttons ── */
+.fwcBtn {
+  border-color: #f59e0b !important;
+  color: #92400e !important;
+}
+.fwcBtn.active {
+  background: #f59e0b !important;
+  border-color: #f59e0b !important;
+  color: #fff !important;
+}
+.ccBtn {
+  border-color: #ef4444 !important;
+  color: #7f1d1d !important;
+}
+.ccBtn.active {
+  background: #ef4444 !important;
+  border-color: #ef4444 !important;
+  color: #fff !important;
+}

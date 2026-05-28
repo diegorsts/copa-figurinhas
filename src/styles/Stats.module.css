@@ -1,0 +1,74 @@
+.page { padding: 16px 14px 24px; }
+
+.summary {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.bigRing { position: relative; width: 100px; flex-shrink: 0; }
+.ring { width: 100px; height: 100px; transform: rotate(-90deg); }
+.ringBg { fill: none; stroke: var(--border); stroke-width: 10; }
+.ringFill {
+  fill: none;
+  stroke: var(--green);
+  stroke-width: 10;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.5s;
+}
+.ringLabel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.ringPct { font-size: 20px; font-weight: 700; color: var(--text); }
+.ringSub { font-size: 10px; color: var(--text-muted); }
+
+.cards { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: var(--bg);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+.cardNum { font-size: 18px; font-weight: 700; color: var(--green); }
+.cardLabel { font-size: 12px; color: var(--text-muted); }
+
+.sectionTitle {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.groupList { display: flex; flex-direction: column; gap: 12px; }
+.groupRow {}
+.groupInfo {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.groupName { font-size: 13px; color: var(--text); }
+.groupCount { font-size: 12px; color: var(--text-muted); }
+.bar { height: 6px; background: var(--border); border-radius: 99px; overflow: hidden; }
+.barFill {
+  height: 100%;
+  background: var(--green);
+  border-radius: 99px;
+  transition: width 0.4s;
+  opacity: 0.75;
+}
+.barFill.done { opacity: 1; }

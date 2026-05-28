@@ -1,0 +1,47 @@
+.page { padding: 16px 14px 24px; }
+
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.info { font-size: 14px; color: var(--text-muted); }
+.info strong { color: var(--text); }
+
+.copyBtn {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 13px;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.copyBtn:hover { background: var(--hover); }
+
+.section { margin-bottom: 24px; }
+.sectionTitle {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.empty { font-size: 13px; color: var(--text-muted); }
+
+.groupBlock { margin-bottom: 12px; }
+.groupName { font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px; }
+
+.pills { display: flex; flex-wrap: wrap; gap: 5px; }
+.pill {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.amber { background: #fff8e1; color: #6d4c00; border: 1px solid #ffc107; }
+.red { background: #fce8e8; color: #8b0000; border: 1px solid #e57373; }
