@@ -46,7 +46,7 @@ const router = createBrowserRouter([
     path: '*',
     element: <Navigate to="/album" replace />,
   },
-])
+], { basename: '/copa-figurinhas' })
 
 export default function AppRouter() {
   return <RouterProvider router={router} />
